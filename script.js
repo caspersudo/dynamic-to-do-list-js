@@ -1,20 +1,21 @@
-// Wait for the DOM to load before running the script
+// Wait for the DOM to fully load
 document.addEventListener('DOMContentLoaded', function () {
-    // Select key DOM elements
+    // Select DOM elements
     const addButton = document.getElementById('add-task-btn');
     const taskInput = document.getElementById('task-input');
     const taskList = document.getElementById('task-list');
 
-    // Function to add a new task
+    // Define the function to add a new task
     function addTask() {
-        const taskText = taskInput.value.trim(); // Get and trim input
+        const taskText = taskInput.value.trim(); // Get and trim input text
 
+        // Check if task is empty
         if (taskText === "") {
             alert("Please enter a task.");
             return;
         }
 
-        // Create a new list item for the task
+        // Create a new list item (li) element
         const li = document.createElement('li');
         li.textContent = taskText;
 
@@ -23,12 +24,12 @@ document.addEventListener('DOMContentLoaded', function () {
         removeBtn.textContent = "Remove";
         removeBtn.className = 'remove-btn';
 
-        // Remove the task when button is clicked
+        // Assign an onclick event to remove the task
         removeBtn.onclick = function () {
             taskList.removeChild(li);
         };
 
-        // Append the remove button and list item to the DOM
+        // Append the button to the list item, then list item to task list
         li.appendChild(removeBtn);
         taskList.appendChild(li);
 
@@ -36,16 +37,16 @@ document.addEventListener('DOMContentLoaded', function () {
         taskInput.value = "";
     }
 
-    // Add task on button click
+    // Event listener for the Add Task button
     addButton.addEventListener('click', addTask);
 
-    // Add task on pressing "Enter" key
+    // Event listener for pressing "Enter" inside the input field
     taskInput.addEventListener('keypress', function (event) {
         if (event.key === 'Enter') {
             addTask();
         }
     });
 
-    // Optional: Automatically load or initialize on page load
-    // addTask(); // Not necessary unless you want to pre-populate
+    // Call addTask on DOMContentLoaded only if needed (not required here)
 });
+
